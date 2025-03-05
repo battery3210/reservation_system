@@ -32,7 +32,7 @@ class ReservationController extends Controller
              return [];
          }
  
-         $reservations_for_web = \App\Models\Reservation::with('stylist')
+         echo $reservations_for_web = \App\Models\Reservation::with('stylist')
          ->whereDate('reservation_datetime',$date)
          ->where('stylist_id',$stylist_id)
          ->get();
