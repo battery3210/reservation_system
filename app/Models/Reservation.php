@@ -14,7 +14,12 @@ class Reservation extends Model
         'reservation_datetime',
         'stylist_id',
         'customer_id',
+        'delete_flg',
     ];
+
+    public function scopeActive($query) {
+            return $query->where('delete_flg', false);
+    }
 
     public function stylist() {
         return $this->belongsTo(Stylist::class);
