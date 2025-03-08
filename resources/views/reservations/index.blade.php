@@ -1,6 +1,6 @@
+@extends('layouts.app')
 
-test
-<br><br>
+@section('content')
 
 @if($errors->any())
     <div class = 'alert-danger'>
@@ -10,29 +10,33 @@ test
             @endforeach
         </ul>
     </div>
+    <br><br>
 @endif
 
 @if(session('error'))
     <div class="alert-danger">
         {{ session('error') }}
     </div>
+    <br><br>
 @endif
 
 @if(session('success'))
     <div class="alert-success">
         {{ session('success') }}
     </div>
+    <br><br>
 @endif
 
-<br><br>
+
 @if($searchByStylistAndDate)
 @foreach($searchByStylistAndDate as $uu)
 <p>該当予約日時：{{$uu->reservation_datetime}}</p>
 <p>該当日時担当スタイリスト：{{$uu->stylist->name}}</p>
 @endforeach
+<br><br>
 @endif
 
-<br><br>
+
 @foreach($reservations as $reservation)
     <p>予約日時：{{$reservation->reservation_datetime}}</p>
     <p>担当スタイリスト：{{$reservation->stylist->name}}</p>
@@ -51,4 +55,6 @@ test
     <p>お客様の名前一覧{{$customer->name}}</p>
     <p>お客様のメアド一覧{{$customer->email}}</p>
 @endforeach
+
+@endsection
 
