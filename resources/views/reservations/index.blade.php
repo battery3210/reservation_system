@@ -30,17 +30,17 @@
 
 @if($searchByStylistAndDate)
 @foreach($searchByStylistAndDate as $uu)
-<p>該当予約日時：{{$uu->reservation_datetime}}</p>
-<p>該当日時担当スタイリスト：{{$uu->stylist->name}}</p>
+<div><font color = '#ff0000'>該当予約日時</font>：{{$uu->reservation_datetime}}</div>
+<div><font color = '#ff0000'>該当日時担当スタイリスト</font>：{{$uu->stylist->name}}</div>
 @endforeach
 <br><br>
 @endif
 
 
 @foreach($reservations as $reservation)
-    <p>予約日時：{{$reservation->reservation_datetime}}</p>
-    <p>担当スタイリスト：{{$reservation->stylist->name}}</p>
-    <p>お客様：{{$reservation->customer->name}}</p>
+    <div>予約日時：{{$reservation->reservation_datetime}}</div>
+    <div>担当スタイリスト：{{$reservation->stylist->name}}</div>
+    <div>お客様：{{$reservation->customer->name}}</div>
     <p>
             <a href="{{ route('reservations.trash', ['reservation_id' => $reservation->id]) }}" 
                onclick="return confirm('この予約をゴミ箱に入れますか？')">ゴミ箱へ</a>
@@ -48,12 +48,12 @@
 @endforeach
 <br><br>
 @foreach($stylists as $aa)
-    <p>スタイリストの名前一覧{{$aa->name}}</p>
+    <div>スタイリストの名前: {{$aa->name}}</div>
 @endforeach
 <br><br>
 @foreach($customers as $customer)
-    <p>お客様の名前一覧{{$customer->name}}</p>
-    <p>お客様のメアド一覧{{$customer->email}}</p>
+    <div>お客様の名前: {{$customer->name}}</div>
+    <div>お客様のメアド: {{$customer->email}}</div><br>
 @endforeach
 
 @endsection

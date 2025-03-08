@@ -2,9 +2,12 @@
 
 @section('content')
 
-test_stylist
 @foreach($stylists as $stylist)
-    <p>名前：{{$stylist->name}}</p>
+    <div>名前：{{$stylist->name}}</div>
+    <div>
+            <a href="{{ route('stylists.trash', ['stylist_id' => $stylist->id]) }}" 
+               onclick="return confirm('この予約をゴミ箱に入れますか？')">ゴミ箱へ</a>
+    </div>
 @endforeach
 
 @endsection

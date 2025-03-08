@@ -13,8 +13,16 @@ class ReservationController extends Controller
     //
     public function index(Request $request) {
 
-        $customers = Customer::all();
-        $stylists = Stylist::all();
+        // $customers = Customer::all();
+        $customers = Customer::
+        where('delete_flg',false)
+        ->orderBy('created_at','desc')
+        ->get();
+        // $stylists = Stylist::all();
+        $stylists = stylist::
+        where('delete_flg',false)
+        ->orderBy('created_at','desc')
+        ->get();
         $reservations = Reservation::with(['stylist','customer'])
         ->where('delete_flg',false)
         ->orderBy('created_at','desc')
