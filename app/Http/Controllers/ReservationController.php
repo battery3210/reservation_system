@@ -77,7 +77,28 @@ class ReservationController extends Controller
  
      }
 
-    public function search_reservation(Request $request) {
+     public function searchReservationJson(Request $request) {
+
+        //下記のやり方でもバリデーション結果をページに返せる↓
+        $validator = Validator::make($request->all(), [
+            'date' => ['required', 'date'],
+            'stylist_id' => ['required', 'integer', 'exists:stylists,id']
+        ], [
+            'date.required' => '日付は必須です。',
+            'date.date' => '日付は0000-00-00のような形式で入力してください。',
+            'stylist_id.required' => 'スタイリストのIDを指定してください。',
+            'stylist_id.integer' => 'スタイリストのIDは数字で指定してください。',
+            'stylist_id.exists' => '存在しないスタイリストのIDです。',
+        ]);
+
+        
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400,[], JSON_UNESCAPED_UNICODE);
+        }
+
+        // $date = $validated['date'];
+        // $stylist_id = $validated['stylist_id'];
 
         $date = $request->query('date');
         $stylist_id = $request->query('stylist_id');
@@ -100,6 +121,10 @@ class ReservationController extends Controller
 
         return response() -> json($response);
 
+    }
+
+    public function create() {
+        return view('reservations.create');
     }
 
     public function trash(Request $request) {
