@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Stylist;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
@@ -14,20 +15,10 @@ class ReservationController extends Controller
 
     public function index(Request $request) {
 
-        // $customers = Customer::all();
-        $customers = Customer::
-        where('delete_flg',false)
-        ->orderBy('created_at','desc')
-        ->get();
-        // $stylists = Stylist::all();
-        $stylists = stylist::
-        where('delete_flg',false)
-        ->orderBy('created_at','desc')
-        ->get();
-        $reservations = Reservation::with(['stylist','customer'])
-        ->where('delete_flg',false)
-        ->orderBy('created_at','desc')
-        ->get();
+        $stylists = Stylist::active()->get();
+        // $customers = Customer::active()->select('id', 'name','email')->get();
+        $customers = Customer::active(['id','name','email'])->get();
+        $reservations = reservation::with(['stylist','customer'])->active()->get();
 
         // $date = $request->query('date');
         // $stylist_id = $request->query('stylist_id');
@@ -130,7 +121,34 @@ class ReservationController extends Controller
 
     ////////////////////////////////////////////////////////////////////////////////////////
 
-    public function create() {
+    public function create(Request $request) {
+
+        if ($request->has('date')) {
+        $validated = $request->validate([
+            'date' => ['required','date'],
+            'time' => ['required','date_format:H:i']
+            ],
+            [
+                'date.required' => '日付は必須です。',
+                'date.date' => '日付は0000-00-00のような形式で入力してください。',
+                'time.required' => '時刻は必須です。',
+                'time.time' => '時刻は00:00のような形式で入力してください。',
+            ]);
+
+            // return redirect()->route('reservations.create')->with('success','フォーマットは正常です。');
+            $date = $validated['date'];
+            $time = $validated['time'];
+            // $reservation_datetime = Carbon::createFromFormat('Y-m-d H:i:s', $validated['date'] . ' ' . $validated['time'] . ':00');
+            $reservation_datetime = Carbon::createFromFormat('Y-m-d H:i:s',$date.' '.$time.':00');
+
+            // 予約データをデータベースに保存
+            Reservation::create([
+                'reservation_datetime' => $reservation_datetime,
+            ]);
+
+
+        }
+
         return view('reservations.create');
     }
 
@@ -157,11 +175,9 @@ class ReservationController extends Controller
         // }
 
         $reservation = Reservation::find($reservation_id);
-
         if(!$reservation){
             return redirect()->route('reservations.index')->with('error','予約が見つかりません');
         }
-
         $reservation->delete_flg = true;
         $reservation->save();
 

@@ -15,4 +15,10 @@ class Customer extends Model
         'email',
     ];
 
+    protected $table = 'customers';
+
+    public function scopeActive($query,$colums = ['*']){
+        return $query->select($colums)->where('delete_flg',false)->orderBy('created_at','desc');
+    }
+
 }

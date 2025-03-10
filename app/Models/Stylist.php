@@ -14,4 +14,11 @@ class Stylist extends Model
         'name',
     ];
 
+    protected $table = 'stylists';
+
+    public function scopeActive($query){
+        return $query->where('delete_flg',false)->orderBy('created_at','desc');
+    }
+
+
 }

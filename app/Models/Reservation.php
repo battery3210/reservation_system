@@ -18,7 +18,7 @@ class Reservation extends Model
     ];
 
     public function scopeActive($query) {
-            return $query->where('delete_flg', false);
+            return $query->where('delete_flg', false)->orderBy('created_at','desc');
     }
 
     public function stylist() {
