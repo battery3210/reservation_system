@@ -20,7 +20,6 @@ Route::match(['get', 'post'], 'reservations/stylists/trash', [StylistController:
 Route::match(['get', 'post'], 'reservations/customers/trash', [CustomerController::class, 'trash'])->name('customers.trash');
 // Route::get('/reservations/create',function (){return view('reservations.create');});
 Route::post('/reservations/create',[ReservationController::class,'create'])->name('reservations.create');
-Route::get('/reservations/create',function (){return view('reservations.create');});
 
 Route::get('/test1', function () {
     return "これはGETのテストページです";

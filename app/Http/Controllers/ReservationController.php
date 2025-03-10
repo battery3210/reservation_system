@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Validator;
 
 class ReservationController extends Controller
 {
-    //
+    ////////////////////////////////////////////////////////////////////////////////////////
+
     public function index(Request $request) {
 
         // $customers = Customer::all();
@@ -63,6 +64,8 @@ class ReservationController extends Controller
         return view('reservations.index',compact('reservations','customers','stylists','searchByStylistAndDate'));
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////
+
     private function searchByStylistAndDate($validated) {
  
         $date = $validated['date'];
@@ -76,6 +79,8 @@ class ReservationController extends Controller
          return $reservations_for_web;
  
      }
+
+     ////////////////////////////////////////////////////////////////////////////////////////
 
      public function searchReservationJson(Request $request) {
 
@@ -123,9 +128,13 @@ class ReservationController extends Controller
 
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////
+
     public function create() {
         return view('reservations.create');
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////
 
     public function trash(Request $request) {
     //    $reservation_id  = $request->query('reservation_id');
@@ -157,6 +166,10 @@ class ReservationController extends Controller
         $reservation->save();
 
         return redirect()->route('reservations.index')->with('success','予約をゴミ箱に入れました');
+        
+        
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////
 
 }
