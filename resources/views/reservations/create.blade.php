@@ -29,17 +29,28 @@
 
     <h2>予約フォーム</h2>
 
+    <br>
     <form action="{{ route('reservations.create') }}" method="POST">
         @csrf
         
         <label for="date">予約日：</label>
         <input type="date" id="date" name="date" value="{{ old('date') }}" required>
-        <br><br>
+        <br>
 
         <label for="time">予約時間：</label>
         <input type="time" id="time" name="time"value="{{ old('time') }}" required>
-        <br><br>
+        <br>
 
+        <label for="date">スタイリスト：</label>
+        <select id='stylist' name='stylist_id' required>
+                <option>選択して下さい</option>
+            @foreach($stylists as $stylist)
+                <option value="{{ $stylist->id }}" >
+                    {{ $stylist->name }}
+                </option>
+            @endforeach
+        </select>
+        <br><br>
         <button type="submit">予約する</button>
     </form>
 @endsection

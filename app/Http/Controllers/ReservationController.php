@@ -123,7 +123,10 @@ class ReservationController extends Controller
 
     public function create(Request $request) {
 
+        $stylists = Stylist::active()->get();
+
         if ($request->has('date')) {
+
         $validated = $request->validate([
             'date' => ['required','date'],
             'time' => ['required','date_format:H:i']
@@ -146,10 +149,9 @@ class ReservationController extends Controller
                 'reservation_datetime' => $reservation_datetime,
             ]);
 
-
         }
 
-        return view('reservations.create');
+        return view('reservations.create',compact('stylists'));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////
