@@ -21,6 +21,11 @@ class Reservation extends Model
             return $query->where('delete_flg', false)->orderBy('created_at','desc');
     }
 
+    public static function getActiveAllReservations() {
+            return static::query()->with(['stylist','customer'])->active()->get();
+    }
+    
+
     public function stylist() {
         return $this->belongsTo(Stylist::class);
     }
