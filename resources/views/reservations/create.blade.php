@@ -44,7 +44,28 @@
         <br>
 
         <label for="time">予約時間：</label>
-        <input type="time" id="time" name="time"value="{{ old('time') }}" step="1800" required pattern="[0-9]{2}:[03]0">
+        <!-- <input type="time" id="time" name="time"value="{{ old('time') }}" step="1800" min="10:00" max="20:00" required >
+        <br> -->
+
+        <!--datalistを使う方法:しかし手入力出来てしまう <input type="time" id="time" name="time" list="time-list"
+            value="{{ old('time') }}" required>
+
+        <datalist id="time-list">
+            @for ($hour = 10; $hour <= 20; $hour++)
+                <option value="{{ $hour }}:00"></option>
+                <option value="{{ $hour }}:30"></option>
+            @endfor
+        </datalist> -->
+
+        <select id="time" name="time" required>
+            <option value = "">選択して下さい</option>
+            @for ($hour=10; $hour<20; $hour++)
+                <option value = "{{ $hour }}:00">{{ $hour }}:00</option>
+                <option value = "{{ $hour }}:30">{{ $hour }}:30</option>
+            @endfor
+        </select>
+
+
         <br>
 
         <label for="date">スタイリスト：</label>
