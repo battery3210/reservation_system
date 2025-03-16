@@ -43,7 +43,7 @@
     <div>お客様：{{$reservation->customer->name}}</div>
     <p>
             <a href="{{ route('reservations.trash', ['reservation_id' => $reservation->id]) }}" 
-               onclick="return confirm('この予約をゴミ箱に入れますか？')">ゴミ箱へ</a>
+               onclick="return confirm('この予約をゴミ箱に入れますかne？')">ゴミ箱へ</a>
     </p>
 @endforeach
 <br><br>
