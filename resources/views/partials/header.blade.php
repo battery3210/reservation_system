@@ -6,6 +6,12 @@
                 <li><a href="{{ route('reservations.create') }}" >予約する</a></li>
                 <li><a href="{{ route('reservations.customer') }}" >お客様一覧</a></li>
                 <li><a href="{{ route('reservations.stylist') }}" >スタイリスト一覧</a></li>
+                @if (Auth::check())
+                <li><a href="{{ route('logout') }}" >ログアウト</a></li>
+                @else
+                <li><a href="{{ route('reservations.auth.login') }}" >ログイン</a></li>
+                <li><a href="{{ route('reservations.auth.login') }}" >新規登録</a></li>
+                @endif
         </ul>
     </div>
 </header>

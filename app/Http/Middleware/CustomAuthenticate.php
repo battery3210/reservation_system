@@ -21,20 +21,28 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Closure;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
-class CustomAuthenticate extends Middleware
+class CustomAuthenticate
 {
     /**
-     * Handle an unauthenticated user.
+     * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param array $guards
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    protected function unauthenticated($request, array $guards)
+    public function handle(Request $request, Closure $next): Response
     {
-        return redirect()->route('reservations')->with('error', 'ログインしてください');
+        // ログインしていない場合、/reservations にリダイレクト
+        if (!Auth::check()) {
+            //return redirect('/reservations');
+            return redirect('/reservations')->with('error', 'ログインして下さい');
+        }
+
+        return $next($request); // ログイン済みなら次の処理へ
     }
 }

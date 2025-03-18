@@ -136,7 +136,7 @@ class ReservationController extends Controller
 
         if ($request->has('date')) {
 
-        $validated = $request->validate([
+            $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:customers,email',
             'date' => ['required','date', 'after_or_equal:today'],

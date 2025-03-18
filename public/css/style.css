@@ -74,3 +74,13 @@ body {
 .all_content {
    width: fit-content;
 }
+
+.alert-danger {
+    color: red;
+    text-align: center;
+}
+
+.alert-success {
+    color: red;
+    text-align: center;
+}
