@@ -25,9 +25,9 @@ class CustomerController extends Controller
             'customer_id' => ['required', 'integer', 'exists:customers,id']
         ],
         [
-            'customer_id.required' => 'スタイリストIDは必須です。',
-            'customer_id.integer' => 'スタイリストIDは数字で指定してください。',
-            'customer_id.exists' => '存在しないスタイリストIDです。',
+            'customer_id.required' => 'カスタマーIDは必須です。',
+            'customer_id.integer' => 'カスタマーIDは数字で指定してください。',
+            'customer_id.exists' => '存在しないカスタマーIDです。',
         ]);
     
             $customer_id = $validated['customer_id'];

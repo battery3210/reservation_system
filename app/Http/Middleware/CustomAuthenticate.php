@@ -40,7 +40,7 @@ class CustomAuthenticate
         // ログインしていない場合、/reservations にリダイレクト
         if (!Auth::check()) {
             //return redirect('/reservations');
-            return redirect('/reservations')->with('error', 'ログインして下さい');
+            return redirect('/reservations/auth/login')->with('error', 'ログインして下さい');
         }
 
         return $next($request); // ログイン済みなら次の処理へ

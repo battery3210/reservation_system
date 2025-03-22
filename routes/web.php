@@ -7,13 +7,14 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Middleware\SimpleMiddleware;
 use App\Http\Middleware\CustomAuthenticate;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/stylists',[StylistController::class,'index']);
-Route::get('/reservations/customer',[CustomerController::class,'showCustomers'])->name('reservations.customer');
+Route::get('/reservations/customer',[CustomerController::class,'showCustomers'])->name('reservations.customer')->middleware(CustomAuthenticate::class); 
 
 Route::get('/reservations/stylist',[StylistController::class,'showStylists'])->name('reservations.stylist')->middleware(SimpleMiddleware::class)->middleware(CustomAuthenticate::class); 
 
@@ -30,6 +31,21 @@ Route::get('/reservations/auth/login',[LoginController::class,'showLoginForm'])-
 Route::post('/reservations/auth/login',[LoginController::class,'login'])->name('reservations.auth.login');
 
 Route::get('/logout',function () { Auth::logout(); return redirect('/reservations/auth/login'); })->name('logout');
+
+//直接viewに移動する場合↓
+// Route::get('/reservations/register', function () { return view('reservations.register'); })->name('reservations.register');
+Route::get('/reservations/register', [RegisterController::class,'showRegisterForm'])->name('reservations.register');
+Route::post('/reservations/register',[RegisterController::class,'customerRegister'])->name('reservations.register');
+
+
+
+
+
+
+
+
+
+
 
 Route::get('/test', function () {
     return "ミドルウェア適用済みのページです";

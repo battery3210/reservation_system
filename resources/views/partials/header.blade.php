@@ -10,7 +10,7 @@
                 <li><a href="{{ route('logout') }}" >ログアウト</a></li>
                 @else
                 <li><a href="{{ route('reservations.auth.login') }}" >ログイン</a></li>
-                <li><a href="{{ route('reservations.auth.login') }}" >新規登録</a></li>
+                <li><a href="{{ route('reservations.register') }}" >新規登録</a></li>
                 @endif
         </ul>
     </div>

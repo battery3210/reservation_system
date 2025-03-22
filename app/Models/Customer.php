@@ -22,6 +22,7 @@ class Customer extends Authenticatable
         'email',
         'password',
         'is_member',
+        'delete_flg'
     ];
 
     protected $hidden = [

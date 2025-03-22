@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1 class="m_top150">ログイン</h1>
+<h1 class="m_top150">会員登録</h1>
 
 @if($errors->any())
     <div class = 'alert-danger'>
@@ -29,9 +29,14 @@
     <br><br>
 @endif
 
-<!-- ログインフォーム -->
-<form action="{{ route('reservations.auth.login') }}" method="POST" class="form_login">
+<!-- 会員登録フォーム -->
+<form action="{{ route('reservations.register') }}" method="POST" class="form_register">
         @csrf
+
+        <div>
+            <label for="name">名前</label>
+            <input type="text" id="name" name="name" value="{{ old('name') }}" required>
+        </div>
 
         <div>
             <label for="email">メールアドレス</label>
@@ -44,13 +49,14 @@
         </div>
 
         <div>
-            <input type="checkbox" id="remember" name="remember">
-            <label for="remember">ログイン情報を記憶する</label>
+            <label for="password_confirmation">パスワード確認</label>
+            <input type="password" id="password" name="password_confirmation" required>
         </div>
 
         <div>
-            <button type="submit">ログイン</button>
+            <button type="submit">登録</button>
         </div>
     </form>
+
 
 @endsection

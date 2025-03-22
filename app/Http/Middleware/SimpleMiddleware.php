@@ -15,7 +15,7 @@ class SimpleMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        echo "aaa";
+        echo "SimpleMiddlewareが適用されたページです。";
         return $next($request);
     }
 }

@@ -2,6 +2,7 @@
 
 @section('content')
 
+<div class="m_top150">
 @foreach($stylists as $stylist)
     <div>名前：{{$stylist->name}}</div>
     <div>
@@ -9,5 +10,5 @@
                onclick="return confirm('この予約をゴミ箱に入れますか？')">ゴミ箱へ</a>
     </div>
 @endforeach
-
+</div>
 @endsection

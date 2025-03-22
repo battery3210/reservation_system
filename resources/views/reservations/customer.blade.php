@@ -4,7 +4,7 @@
 @section('content')
 
 
-test_customer
+test_customer<br><br>
 @foreach($customers as $customer)
     <div>名前：{{$customer->name}}</div>
     <div>EMAL：{{$customer->email}}</div>
